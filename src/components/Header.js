@@ -25,6 +25,9 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
 import { useLocation, useNavigate } from "react-router-dom";
+
+import Modal from './Modal.js';
+
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
   { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -45,10 +48,15 @@ export default function Example() {
     document.title = 'Home | Study Nexus'
   }, [])
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <header className="bg-white">
 
-      {!isAuthenticated && (
+      {isAuthenticated && (
         <div className="w-full min-h-[100vh] flex flex-col items-center relative bg-black">
         <div className="w-full h-[100vh] font-generica font-semibold text-center relative z-10">
           <div className='w-full h-full absolute bg-cover bg-fixed opacity-[0.7]' style={{
@@ -67,7 +75,7 @@ export default function Example() {
       }
 
       {
-        isAuthenticated && (
+        !isAuthenticated && (
           <div className="w-full min-h-[100vh] flex flex-col items-center relative bg-black">
           <div className="w-full h-[100vh] font-generica font-semibold text-center relative z-10">
             <div className='w-full h-full absolute bg-cover bg-fixed opacity-[0.7]' style={{
@@ -173,12 +181,13 @@ export default function Example() {
             </div>
 
             <div className="mt-12 text-center">
-              <a
-                href="#"
+              <button
+                onClick={openModal}
                 className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
-                Subscribe
-              </a>
+                Donate
+              </button>
+              <Modal isOpen={isModalOpen} onClose={closeModal} />
             </div>
           </div>
             </div>
