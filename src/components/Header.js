@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Dialog,
   DialogPanel,
@@ -19,6 +19,7 @@ import {
   CursorArrowRaysIcon,
   FingerPrintIcon,
   SquaresPlusIcon,
+  UnderlineIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
@@ -36,157 +37,155 @@ const callsToAction = [
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
 export default function Example() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const { loginWithRedirect, isAuthenticated, logout, user  } = useAuth0();
-    const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Home | Study Nexus'
+  }, [])
 
   return (
     <header className="bg-white">
 
-        {!isAuthenticated && (
-            <section className="bg-gray-900 text-white">
-            <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-              <div className="mx-auto max-w-lg text-center">
-                <h2 className="text-3xl font-bold sm:text-4xl">Welcome to Study Nexus!!</h2>
-          
-                <p className="mt-4 text-gray-300">
-                  Are you ready to embark on your study journey
-                </p>
-              </div>
-              </div>
-              </section>
-        )
+      {!isAuthenticated && (
+        <div className="w-full min-h-[100vh] flex flex-col items-center relative bg-black">
+        <div className="w-full h-[100vh] font-generica font-semibold text-center relative z-10">
+          <div className='w-full h-full absolute bg-cover bg-fixed opacity-[0.7]' style={{
+            backgroundImage: `url(./bgimg.jpg)`,
+            backgroundPosition: 'center',
+            zIndex: -1 // Ensure background is behind the text
+          }}></div>
+          <div className='w-full h-full pt-[10vh] flex justify-center items-center flex-col gap-10 relative z-20'>
+            <h1 className='text-5xl text-white font-serif'>Welcome to Study Nexus!</h1>
+            <h1 className="text-6xl text-white font-serif">Plan Pursue Progress</h1>
+          </div>
+        </div>
+      </div>
+      )
 
-        }
-               
+      }
+
       {
-    isAuthenticated && (
-        <section className="bg-gray-900 text-white">
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-    <div className="mx-auto max-w-lg text-center">
-      <h2 className="text-3xl font-bold sm:text-4xl">Welcome back Champion {user.name}!!</h2>
+        isAuthenticated && (
+          <div className="w-full min-h-[100vh] flex flex-col items-center relative bg-black">
+          <div className="w-full h-[100vh] font-generica font-semibold text-center relative z-10">
+            <div className='w-full h-full absolute bg-cover bg-fixed opacity-[0.7]' style={{
+              backgroundImage: `url(./bgimg.jpg)`,
+              backgroundPosition: 'center',
+              zIndex: -1 // Ensure background is behind the text
+            }}></div>
+              <h1 className='text-5xl text-white mt-10'>Welcome to Study Nexus!</h1>
+              <h1 className="text-2xl text-white mt-4">Ready to Embark on your Study Journey</h1>
 
-      <p className="mt-4 text-gray-300">
-        Are you ready to embark on your study journey
-      </p>
-    </div>
+              <div className="mt-8 ml-5 mr-5 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <button
+                className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+                onClick={() => navigate("/Calendar")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-10 text-pink-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  />
+                </svg>
 
-    <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <button
-        className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        onClick={() => navigate("/Calendar")}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-10 text-pink-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path
-            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-          />
-        </svg>
+                <h2 className="mt-4 text-xl font-bold text-black">Your Calender</h2>
 
-        <h2 className="mt-4 text-xl font-bold text-black">Your Calender</h2>
+                <p className="mt-1 text-sm text-gray-300">
+                Your one-stop Calendar to effortlessly manage study schedules, track deadlines, and plan all your important academic events.
+                </p>
+              </button>
 
-        <p className="mt-1 text-sm text-gray-300">
-          Wondering what's on your calender ? Go check out now!
-        </p>
-      </button>
+              <button
+                className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
 
- 
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-10 text-pink-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  />
+                </svg>
 
- 
+                <h2 className="mt-4 text-xl font-bold text-black">StudyBot AI</h2>
 
-   
+                <p className="mt-1 text-sm text-gray-300">
+                Your 24/7 study companion, here to provide instant answers for all your learning needs.
+                </p>
+              </button>
 
-      
+              <button
+                className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
 
-      <button
-        className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-10 text-pink-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path
-            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-          />
-        </svg>
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-10 text-pink-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  />
+                </svg>
 
-        <h2 className="mt-4 text-xl font-bold text-black">Study Room</h2>
+                <h2 className="mt-4 text-xl font-bold text-black">Study Room</h2>
 
-        <p className="mt-1 text-sm text-gray-300">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-          distinctio alias voluptatum blanditiis laudantium.
-        </p>
-      </button>
+                <p className="mt-1 text-sm text-gray-300">
+                A dedicated space where focused learning meets collaborative opportunities, designed to help you achieve your academic goals.
+                </p>
+              </button>
 
-      <button
-        className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-10 text-pink-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path
-            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-          />
-        </svg>
 
-        <h2 className="mt-4 text-xl font-bold text-black">Pomodoro</h2>
+            </div>
 
-        <p className="mt-1 text-sm text-gray-300">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-          distinctio alias voluptatum blanditiis laudantium.
-        </p>
-      </button>
+            <div className="mt-12 text-center">
+              <a
+                href="#"
+                className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
+              >
+                Subscribe
+              </a>
+            </div>
+          </div>
+            </div>
 
-    
-    </div>
-
-    <div className="mt-12 text-center">
-      <a
-        href="#"
-        className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
-      >
-        Subscribe
-      </a>
-    </div>
-  </div>
-</section>
-    )
-}
-    </header>
+            
+        )
+      }
+    </header >
   )
 }
