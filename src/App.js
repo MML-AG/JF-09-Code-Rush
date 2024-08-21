@@ -4,10 +4,12 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Calendar from './Calendar';
 import Pomodoro from './Pomodoro';
+import Player from './components/musicplayer';
 import { useNavigate, Routes, Route, BrowserRouter } from 'react-router-dom';
+import StudyRoom from './StudyRoom'
 import ErrorBoundary from './components/ErrorBoundary'; // Import the ErrorBoundary component
 // import './index.css';
-
+import NotFound from "./NotFound"
 import SettingsContextProvider from './context/SettingsContext';
 function App() {
   return (
@@ -22,6 +24,7 @@ function Main() {
 
   return (
     <ErrorBoundary>
+
       <Routes>
         <Route path='/' element={
           <>
@@ -43,17 +46,21 @@ function Main() {
             </SettingsContextProvider>
           </>
         } />
-        <Route path='*' element={
-          <div className='h-[100vh] w-full pt-[10vh] flex-col justify-center items-center'>
+        <Route path='/player' element={
+          <>
             <Navbar />
-            <div className='flex h-10 items-center space-x-4 text-2xl'>
-              <div>404</div>
-              <div>Page Not Found</div>
-            </div>
-          </div>
+          <Player />
+          </>
         } />
+        <Route path='/study' element={
+          <>
+            <Navbar />
+          < StudyRoom/>
+          </>
+        } />
+          <Route path="*" element={<NotFound />} />
       </Routes>
-    </ErrorBoundary>
+        </ErrorBoundary>
   );
 }
 
