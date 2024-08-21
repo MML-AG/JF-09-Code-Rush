@@ -7,6 +7,7 @@ import Pomodoro from './Pomodoro';
 import Player from './components/musicplayer';
 import { useNavigate, Routes, Route, BrowserRouter } from 'react-router-dom';
 import StudyRoom from './StudyRoom'
+import ChatRoom from './ChatRoom'
 import ErrorBoundary from './components/ErrorBoundary'; // Import the ErrorBoundary component
 // import './index.css';
 import NotFound from "./NotFound"
@@ -56,6 +57,12 @@ function Main() {
           <>
             <Navbar />
           < StudyRoom/>
+          </>
+        } />
+        <Route path='/bot' element={
+          <>
+            <Navbar />
+          < ChatRoom/>
           </>
         } />
           <Route path="*" element={<NotFound />} />

@@ -44,10 +44,10 @@ export default function Example() {
     <header className="bg-white opasity-[0.8]">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <button  onClick={() => navigate("/")} className="-m-1.5 p-1.5">
             <span className="sr-only">Study Nexus</span>
             <h2>STUDY NEXUS</h2>
-          </a>
+          </button>
         </div>
         <div className="flex lg:hidden">
           <button
