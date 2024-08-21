@@ -4,7 +4,8 @@ import { FaDiscord } from 'react-icons/fa';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import 'tailwindcss/tailwind.css';
-
+import ToDo from './ToDo'
+import Pomodoro from './Pomodoro'
 const StudyRoom = () => {
   const [studyDuration, setStudyDuration] = useState(25); // Default to 25 minutes
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -108,6 +109,9 @@ const StudyRoom = () => {
           >
             Change Background Color
           </button>
+
+          <ToDo />
+
         </div>
       </div>
     </div>
